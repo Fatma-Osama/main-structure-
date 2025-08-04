@@ -1,0 +1,141 @@
+<p>form-module works!</p>
+
+<!--regular multi checkbox work--> 
+<input type="checkbox"  value="yes"  (input)="checkInput($event)">
+<input type="checkbox"  value="no"  (input)="checkInput($event)">
+
+<!--primeeg multi checkbox work-->
+<div class="flex align-items-center">
+    <p-checkbox 
+        [(ngModel)]="pizza"
+        label="Cheese" 
+        name="pizza" 
+        value="Cheese" />
+</div>
+<div class="flex align-items-center">
+    <p-checkbox 
+        [(ngModel)]="pizza"
+        label="Mushroom"
+        name="pizza" 
+        value="Mushroom" />
+</div>
+<div class="flex align-items-center">
+    <p-checkbox 
+        [(ngModel)]="pizza"
+        label="Pepper" 
+        name="pizza" 
+        value="Pepper" />
+</div>
+<div class="flex align-items-center">
+    <p-checkbox 
+        [(ngModel)]="pizza"
+        label="Onion" 
+        name="pizza" 
+        value="Onion" />
+</div>
+<!--end-->
+
+<form action="" (ngSubmit)="save()" >
+  <input type="text" name="name" id="" [(ngModel)]="model.title" >
+  <input type="text" name="title" id=""       [(ngModel)]="model.email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" 
+      #emailInput='ngModel'
+      [ngClass]="{'in-valid': (emailInput.invalid)}">
+  <input type="checkbox"  name='isActive'  [(ngModel)]="model.isActive">
+  <input type="text" name="status" id=""    [(ngModel)]="model.status">
+  <!--check box doesnt work with-->
+  <!-- <input type="checkbox" name="new" id="" [value]="new"  [(ngModel)]="model.done">
+  <input type="checkbox" name="inProgress" id="" [value]="inProgress"  [(ngModel)]="model.done">
+  <input type="checkbox" name="done" id="" [value]="hello"  [(ngModel)]="model.done"> -->
+ <!--radio button -->
+
+
+  <div class="flex gap-4">
+    <input id="a" type="radio" value="a"  [formControl]="grade"> <label for="a"></label>
+    <input id="b" type="radio" value="b"  [formControl]="grade"> <label for="b"></label>
+    <input id="c" type="radio" value="c"  [formControl]="grade"> <label for="c"></label>
+  </div>
+  
+
+
+
+  <input type="radio" name="new" id="" value="new"  [(ngModel)]="model.done">
+  <input type="radio" name="inProgress" id="" value="inProgress"  [(ngModel)]="model.done">
+  <input type="radio" name="done" id="" value="done"  [(ngModel)]="model.done">
+
+
+
+  <button type="submit">
+    save
+  </button>
+
+
+  <h2>
+    {{ model.email?.errors | json }}
+
+  </h2>
+
+
+
+</form>
+
+
+<input type="text" name="status"  placeholder="test control"     [formControl]="name">
+{{name.errors | json }}
+
+<form [formGroup]="formModel" (ngSubmit)="saveForm(formModel)">
+  
+  
+  
+    <input id="ab" type="radio" value="ab"  formControlName="class"> <label for="ab"> ab </label>
+    <input id="ac" type="radio" value="ac"  formControlName="class"> <label for="ac"> ac </label>
+    <input id="ad" type="radio" value="ad"  formControlName="class"> <label for="ad"> ad </label>
+  
+  
+  <app-inputfield [control]="formModel.get('nameInput')">  </app-inputfield>
+  <app-inputfield inputType="checkbox" [control]="formModel.get('isActive')">  </app-inputfield>
+
+  <input placeholder="enter ur name" formControlName="name" >
+
+
+  <textarea placeholder="desc" formControlName="desc" cols="4" rows="5" >
+
+  </textarea>
+
+  <!-- {{ getAllErrors() | json }} -->
+  <div>
+    <p *ngIf="formModel.get('name')?.touched && formModel.get('name')?.invalid">  
+      {{ formModel.get('name')?.errors | json }}
+
+    </p>
+
+  </div>
+
+      <input type="checkbox"   formControlName="success">
+
+  
+  {{ formErrors | json }}
+    
+    <input placeholder="file" formControlName="File" type="file" (input)=uploadFile($event)>
+      <p *ngIf="formModel.get('name')?.touched && formModel.get('name')?.invalid">  
+      
+         {{ formModel.get('File')?.errors | json }}
+
+       </p>
+    <button type="submit">
+     save reactive form
+    </button>
+
+</form>
+
+
+
+<div class="row">
+  @for (file of filesList ;track file  ){
+
+    <div class="col-3">
+      <a [href]="uploadUrl+file.filename">  {{file?.filename}}   </a>
+
+      <img [src]='uploadUrl+file.filename' >
+    </div>
+  }
+</div>

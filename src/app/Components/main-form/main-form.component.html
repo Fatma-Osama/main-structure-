@@ -1,0 +1,31 @@
+<p>main-form works!</p>
+<div class="flex gap-4">
+
+
+  
+  <app-inputfield [control]="name"   (updateValue)="updateValue($event)"></app-inputfield>
+  <app-inputfield [control]="status"   inputType="checkbox" (updateValue)="updateValue($event)"></app-inputfield>
+  <app-inputfield [control]="desc"   inputType="textarea"> </app-inputfield>
+
+</div>
+
+
+<form [formGroup]="mainForm"> 
+
+
+  <app-inputfield [control]="nameAr"   (updateValue)="updateValue($event)"></app-inputfield>
+  <app-inputfield [control]="isActive"    inputType="checkbox" (updateValue)="updateValue($event)"></app-inputfield>
+  <!-- <app-inputfield [control]="opinion"  inputType="textarea" > </app-inputfield> -->
+
+
+</form> 
+
+
+
+
+
+
+
+
+
+<button (click)="save()"> submit </button>

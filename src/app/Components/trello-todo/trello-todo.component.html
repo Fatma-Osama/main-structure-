@@ -1,0 +1,112 @@
+<div class="container-fluide">
+  <div class="row">
+    <div class="col-md-3" style="background-color: cadetblue; min-height: 400px;">
+
+      <mat-card class="m-3 p-3">
+        <form [formGroup]="trelloForm" (ngSubmit)="addTask(trelloForm.value)">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="title">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+            <!-- <p>  {{trelloForm.get('item')?.value }} </p>
+
+            
+            <p>  {{trelloForm.get('item')?.invalid && trelloForm.get('item')?.touched }} </p>
+            <p>  {{trelloForm.get('item')?.invalid  }} </p> -->
+          </mat-form-field>
+            @if(!enabledEdit){
+              <button  type="submit" mat-button color="primary" [disabled]="trelloForm.invalid"> add task </button>
+
+            }
+            @if(enabledEdit){
+              <button  type="submit" mat-button color="primary" [disabled]="trelloForm.invalid"> Edit task </button>
+
+            }
+
+        </form>
+      </mat-card>
+
+      
+      
+      
+    </div>
+    <div class="col-md-3" style="background-color: #ffff004d; min-height: 400px;">
+
+      <div class="example-container">
+        <h2>To do</h2>
+  
+        <div
+          style=" min-height: 100px;"
+
+          cdkDropList
+          #todoList1="cdkDropList"
+          [cdkDropListData]="tasksCollection.tasks"
+          [cdkDropListConnectedTo]="[todoList2, todoList3]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event , 'tasks')">
+          @for (item of tasksCollection.tasks; track item; let i = $index) {
+            <div class="example-box mb-2 d-flex gap-2 justify-content-between" cdkDrag dropped="dragTracking(item)">
+              {{item.title}}
+
+              <button (click)="updateTask(i, item, 'tasks')"> edit </button>
+
+              <button (click)="deleteTask(i, 'tasks')">  delete  </button>
+            </div>
+          }
+        </div>
+        </div>
+    </div>
+    <div class="col-md-3" style="background-color: #7fffff; min-height: 400px;">
+
+      <div class="example-container">
+      <h2>in progress</h2>
+  
+      <div
+        style=" min-height: 100px;"
+          cdkDropList
+          #todoList2="cdkDropList"
+          [cdkDropListData]="tasksCollection.inprogressTasks"
+          [cdkDropListConnectedTo]="[todoList1, todoList3]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event, 'inprogress')">
+          @for (item of tasksCollection.inprogressTasks; track item; let i = $index) {
+            <div class="example-box mb-2 d-flex gap-2 justify-content-between" cdkDrag>
+              {{item.title}}
+                <button (click)="updateTask(i, item, 'inprogressTasks')"> edit </button>
+
+              <button (click)="deleteTask(i, 'inprogressTasks')">  delete  </button>
+            </div>
+
+        }
+      </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="background-color: #00804cad; min-height: 400px;">
+
+      <div class="example-container">
+      <h2>Done</h2>
+  
+      <div
+      style=" min-height: 100px;"
+        cdkDropList
+        #todoList3="cdkDropList"
+        [cdkDropListData]="tasksCollection.doneTasks"
+        [cdkDropListConnectedTo]="[todoList1, todoList2]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event, 'done')">
+        @for (item of tasksCollection.doneTasks; track item;  let i = $index) {
+            <div class="example-box mb-2 d-flex gap-2 justify-content-between" cdkDrag>
+            {{item.title}}
+
+              <button (click)="deleteTask(i, 'inprogressTasks')">  delete  </button>
+
+          </div>
+        }
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>

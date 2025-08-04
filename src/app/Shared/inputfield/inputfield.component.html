@@ -1,0 +1,53 @@
+
+
+  <div *ngIf="inputType == 'checkbox'">
+    
+  
+    <p-checkbox 
+    [formControl]="formControl"
+    [binary]="true" 
+     />
+  
+  
+   
+    <p *ngIf="formControl?.touched && formControl?.invalid">
+    
+    
+      {{ formControl.errors | json }}
+    </p>
+  
+  </div>
+  
+  
+  <div *ngIf="inputType == 'text'">
+      
+      <input [placeholder]="placeholder"  [attr.type]="inputType"   [formControl]="formControl" (change)="updateInput($event)" >
+    
+    
+      
+      <p *ngIf="formControl?.touched && formControl?.invalid">
+      
+      
+        {{ formControl.errors | json }}
+      </p>
+    
+    
+    
+  </div>
+  <div *ngIf="inputType == 'textarea'">
+      
+      <textarea placeholder="placeholder"  [formControl]="formControl" cols="4" rows="5" >
+
+      </textarea>    
+    
+      
+      <p *ngIf="formControl?.touched && formControl?.invalid">
+      
+      
+        {{ formControl.errors | json }}
+      </p>
+    
+    
+    
+  </div>
+

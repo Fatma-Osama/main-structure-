@@ -1,0 +1,24 @@
+<div>
+ <h1> {{title}} </h1>
+ <a routerLink="/form"> form </a>
+ 
+ 
+ <input type="text" placeholder="name" [(ngModel)]="newTask">
+ <button type="button" (click)="addTasks()">add</button>
+ @if(isAvailable){
+   <div>
+     @for(i of tasks; track $index)
+     {
+       <div >
+         
+         <p>  {{i}} </p>
+         <button (click)="remove($index)">remove</button>
+         <button (click)='edit($index, newTask)'>edit</button>
+         
+        </div>
+      }
+    </div>
+  }
+  <img [src]="imgLink" alt="toDoList">
+
+</div>

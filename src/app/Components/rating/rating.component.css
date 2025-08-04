@@ -1,0 +1,17 @@
+.star-rating::after {
+    content: "★★★★★";
+    --rating-percent: calc(var(--rating) / var(--total) * 100% );
+    background: linear-gradient(90deg,
+        yellow var(--rating-percent),
+        gray var(--rating-percent));
+    background-clip: text;
+    -webkit-background-clip: text; /* For cross-browser compatibility */
+    color: transparent;
+    white-space: nowrap; 
+}
+.rating  {
+  font-size: 24px;
+  display: flex;
+}
+
+
